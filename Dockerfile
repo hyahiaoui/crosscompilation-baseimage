@@ -5,6 +5,15 @@
 # for a list of version numbers.
 FROM phusion/baseimage:latest
 
+RUN apt-get update && apt-get install -y wget mingw-w64 xvfb
+
+RUN dpkg --add-architecture i386 && \
+		wget -nc https://dl.winehq.org/wine-builds/Release.key && \
+		apt-key add Release.key && \
+		apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
+		apt-get update && \
+		apt-get install -y --install-recommends winehq-stable
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
