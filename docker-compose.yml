@@ -1,0 +1,11 @@
+version: "2.1"
+
+services:
+
+  crosscompilation-baseimage:
+    build: .
+    env_file:
+      - ./crosscompilation-baseimage.env
+    volumes:
+      - ./entrypoint.sh:/entrypoint.sh
+      - .:/usr/src/app
